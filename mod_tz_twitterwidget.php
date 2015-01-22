@@ -21,7 +21,7 @@ defined('_JEXEC') or die;
 
 // Include the helper file
 require_once dirname(__FILE__).'/helper.php';
-
+$mod_ID = $module->id;
 // if cURL is disabled, then extension cannot work
 if(!is_callable('curl_init')){
 	$data = false;
@@ -29,7 +29,7 @@ if(!is_callable('curl_init')){
 }
 else {
 	$model = new modTzTwitterWidgetHelper();
-	$model->addStyles($params);
+	$model->addStyles($params,$mod_ID);
 	$data = $model->getData($params);
 }
 

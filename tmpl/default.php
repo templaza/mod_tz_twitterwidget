@@ -18,19 +18,23 @@
 -------------------------------------------------------------------------*/
 	// no direct access
 	defined('_JEXEC') or die;
+
+$modID = $module->id;
+$follow = $params->get('follow_us', 1);
 ?>
-<div id="wds-container">
-	<div id="wds">
+<div id="TzMod<?php echo $modID; ?>">
+<div class="tztwd-container">
+	<div class="tztwd">
 		<?php if($params->get('header', 1)) : ?>
-		<div id="wds-header">
+		<div class="tztwd-header">
 			<?php if($params->get('twitter_icon', 1)) : ?>
-				<div id="wds-twitter-icon"><a href="http://twitter.com" target="_blank">twitter</a></div>
+				<div class="tztwd-twitter-icon"><a href="http://twitter.com" target="_blank">twitter</a></div>
 			<?php endif; ?>
 			<?php if($params->get('type', 1)) : ?>
 				<a href="https://twitter.com/<?php echo $data->tweets[0]->screenName; ?>" target="_blank">
-					<img src="<?php echo $data->tweets[0]->profileImage; ?>" class="wds-avatar" />
-					<span class="wds-display-name"><?php echo $data->tweets[0]->displayName; ?></span>
-					<span class='wds-screen-name'> @<?php echo $data->tweets[0]->screenName; ?></span>
+					<img src="<?php echo $data->tweets[0]->profileImage; ?>" class="tztwd-avatar" />
+					<span class="tztwd-display-name"><?php echo $data->tweets[0]->displayName; ?></span>
+					<span class='tztwd-screen-name'> @<?php echo $data->tweets[0]->screenName; ?></span>
 				</a>
 				<div style="clear: both;"></div>
 				<?php else: ?>
@@ -42,54 +46,63 @@
 				<?php endif; ?>
 		</div>
 		<?php endif; ?>
-		<div id="wds-tweets">
+		<div class="tztwd-tweets">
 			<?php foreach($data->tweets as $key => $tweet): ?>
-			<div class="wds-tweet-container <?php echo end(array_keys($data->tweets)) == $key?' wds-last':'';?>">
+			<div class="tztwd-tweet-container <?php echo end(array_keys($data->tweets)) == $key?' tztwd-last':'';?>">
 				<?php if($params->get('avatars', 1)): ?>
-					<div>
-						<a href="https://twitter.com/intent/user?screen_name=<?php echo $tweet->screenName; ?>" target="_blank">
-							<img src="<?php echo $tweet->profileImage; ?>" class="wds-avatar" style="width: 35px;" />
-						</a>
-					</div>
-					<div class="wds-tweet" style="padding-left: 40px;">
-						<?php else: ?>
-							<div class="wds-tweet">
-						<?php endif; ?>
-						<?php if($params->get('display_name', 1)): ?>
-							<a href="https://twitter.com/intent/user?screen_name=<?php echo $tweet->screenName; ?>" target="_blank"><?php echo $tweet->screenName; ?></a> 
-						<?php endif; ?>
-						<?php echo $tweet->text; ?>
-					</div>
-					<div class="wds-tweet-data">
-						<?php if($params->get('timestamps', 1)): ?>
-							<a href="https://twitter.com/<?php echo $tweet->screenName; ?>/statuses/<?php echo $tweet->id; ?>" target="_blank"><?php echo $tweet->time; ?></a>
-							<?php if($params->get('reply', 1) || $params->get('retweet', 1) || $params->get('favorite', 1)): ?>
-								&bull;
-							<?php endif; ?>
-						<?php endif; ?>
-						<?php if($params->get('reply', 1)): ?>
-							<a href="https://twitter.com/intent/tweet?in_reply_to=<?php echo $tweet->id; ?>" target="_blank">reply</a>
-							<?php if($params->get('retweet', 1) || $params->get('favorite', 1)): ?>
-								&bull;
-							<?php endif; ?>
-						<?php endif; ?>
-						<?php if($params->get('retweet', 1)): ?>
-							<a href="https://twitter.com/intent/retweet?tweet_id=<?php echo $tweet->id; ?>" target="_blank">retweet</a>
-							<?php if($params->get('favorite', 1)): ?>
-								&bull;
-							<?php endif; ?>
-						<?php endif; ?>
-						<?php if($params->get('favorite', 1)): ?>
-							<a href="https://twitter.com/intent/favorite?tweet_id=<?php echo $tweet->id; ?>" target="_blank">favorite</a>
-						<?php endif; ?>
-					</div>
-				</div>
+                <div class="avata-info">
+                    <a href="https://twitter.com/intent/user?screen_name=<?php echo $tweet->screenName; ?>" target="_blank">
+                        <img src="<?php echo $tweet->profileImage; ?>" class="tztwd-avatar" style="width: 35px;" />
+                    </a>
+                </div>
+                <div class="tztwd-tweet">
+                    <?php else: ?>
+                        <div class="tztwd-tweet">
+                    <?php endif; ?>
+                    <?php if($params->get('display_name', 1)): ?>
+                        <a href="https://twitter.com/intent/user?screen_name=<?php echo $tweet->screenName; ?>" target="_blank"><?php echo $tweet->screenName; ?></a>
+
+                    <?php endif; ?>
+                    <?php echo $tweet->text; ?>
+                </div>
+                <div class="tztwd-tweet-data">
+                    <?php if($params->get('timestamps', 1)): ?>
+                        <a href="https://twitter.com/<?php echo $tweet->screenName; ?>/statuses/<?php echo $tweet->id; ?>" target="_blank"><?php echo $tweet->time; ?></a>
+                        <?php if($params->get('reply', 1) || $params->get('retweet', 1) || $params->get('favorite', 1)): ?>
+                            &bull;
+                        <?php endif; ?>
+                    <?php endif; ?>
+                    <?php if($params->get('reply', 1)): ?>
+                        <a href="https://twitter.com/intent/tweet?in_reply_to=<?php echo $tweet->id; ?>" target="_blank"><?php echo JText::_('TZ_TWEET_REPLY');?></a>
+                        <?php if($params->get('retweet', 1) || $params->get('favorite', 1)): ?>
+                            &bull;
+                        <?php endif; ?>
+                    <?php endif; ?>
+                    <?php if($params->get('retweet', 1)): ?>
+                        <a href="https://twitter.com/intent/retweet?tweet_id=<?php echo $tweet->id; ?>" target="_blank"><?php echo JText::_('TZ_RETWEET');?></a>
+                        <?php if($params->get('favorite', 1)): ?>
+                            &bull;
+                        <?php endif; ?>
+                    <?php endif; ?>
+                    <?php if($params->get('favorite', 1)): ?>
+                        <a href="https://twitter.com/intent/favorite?tweet_id=<?php echo $tweet->id; ?>" target="_blank"><?php echo JText::_('TZ_TWEET_FAVORITE');?></a>
+                    <?php endif; ?>
+                </div>
+            </div>
 			<?php endforeach; ?>
 		</div>
 	</div>
-	<?php if($params->get('show_link', 1)) : ?>
-	<div class="wds-copyright">
-		<a href="http://www.webdesignservices.net" title="web design services" target="_blank">web design services</a>
-	</div>
-	<?php endif; ?>
+<?php if($follow==1){ ?>
+    <div class="twitter-flow">
+        <div class="flow-content">
+            <a href="https://twitter.com/intent/user?screen_name=<?php echo $tweet->screenName; ?>" class="twitter-follow" data-show-count="false" data-lang="en"><?php echo JText::_('TZ_TWEET_FOLLOW');?></a>
+
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+        </div>
+    </div>
+    <div class="clr"></div>
+
+<?php } ?>
+
+</div>
 </div>

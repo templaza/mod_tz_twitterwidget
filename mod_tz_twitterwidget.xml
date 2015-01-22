@@ -4,122 +4,112 @@
 	version="2.5"
 	client="site"
 	method="upgrade">
-	<name>Mod TZ Twitter Widget </name>
+	<name>TZ Twitter Widget </name>
 	<author>Templaza</author>
 	<creationDate>June 2013</creationDate>
 	<copyright>Copyright (C) 2012 TemPlaza. All rights reserved.</copyright>
 	<license>GNU/GPL Version 2 or later - http://www.gnu.org/licenses/gpl-2.0.html</license>
 	<authorUrl>www.templaza.com</authorUrl>
-	<version>1.0</version>
-	<description><![CDATA[ 
-	<p>
-	<a href="https://www.webdesignservices.net/about-us/support-donation.html" target="_blank"><img src="../modules/mod_wdstwitterwidget/images/donate_button.png" /></a>
-	</p>
-	<p>
-	<a href="http://extensions.joomla.org/extensions/social-web/social-display/twitter-display/24195/review" target="_blank"><img src="../modules/mod_wdstwitterwidget/images/feed_back.png"/></a>
-	</p>
-	<p>
-	<a href="https://www.webdesignservices.net/about-us/joomla-twitter-widget-pro.html" target="_blank"><img src="../modules/mod_wdstwitterwidget/images/oder_nowpro.png"/></a>
-	</p>
-	<h1>Important</h1><h2 style="color: red">To use this module, please follow the steps bellow:</h2>
-	<p>1) Register at <a href="https://dev.twitter.com/apps/new" target="_blank">https://dev.twitter.com/apps/new</a>
-	 and create a new app.</p>
-	<p>2) After registering, fill in App name, e.g. "_domain name_ App", description, e.g "My Twitter App", and write the address of your website. Check "I agree" next to their terms of service
-	  and click "create your Twitter application"</p>
-	<p>3) After this you app will be created. Click "Create my access token" and you should see at the bottom "access token" and "access token secret". Refresh the page if you don't see them.
-	<p>4) Copy to module settings "Consumer key", "Consumer secret", "Access token" and "Access secret"</p>
-	<h2>FAQ</h2>
-	<p><strong><span style="color: #000;">Q:</span></strong> Why do I have to trouble with all of this?<br />
-		<strong><span style="color: #000;">A:</span></strong> Twitter is removing access for all unauthorized requests, so every extension which wants to connect to Twitter
-	 must use authentication, otherwise it will stop working (many already have).</p>
-	<p><strong><span style="color: #000;">Q:</span></strong> My module doesn't work!<br />
-		<strong><span style="color: #000;">A:</span></strong> Make sure that you have copied the correct keys. If widget type is set to timeline, make sure you chose a valid Twitter username. If widget type
-		 is set to search, Twitter may return error if search query is extremely complex.</p>
-	<p><strong><span style="color: #000;">Q:</span></strong> Do you cache results?<br />
-		<strong><span style="color: #000;">A:</span></strong> Yes, but you should almost always see the latest tweets. Module will always try to get the latest tweets and save them to a cache. In case of a problem, tweets will be retrived from the cache.
-		 For high traffic sites (more than 10.000 visits per day), you may occasionally get tweets from the cache, as Twitter doesn't allow more than 180 requests per 15 minutes.
-		  If you use more requests than allowed, module will display latest saved tweets from the cache, until new 15 minute window opens.</p>
-	]]></description>
+	<version>1.1</version>
+	<description>Tz Twitter Widget</description>
 	<files>
 		<filename module="mod_tz_twitterwidget">mod_tz_twitterwidget.php</filename>
 		<folder>css</folder>
 		<folder>lib</folder>
 		<folder>images</folder>
+		<folder>js</folder>
 		<folder>tmpl</folder>
 		<filename>helper.php</filename>
+		<filename>index.html</filename>
 		<filename>mod_tz_twitterwidget.xml</filename>
 	</files>
+    <languages folder="language">
+        <language tag="en-GB">en-GB/en-GB.mod_tz_twitterwidget.ini</language>
+        <language tag="en-GB">en-GB/en-GB.mod_tz_twitterwidget.sys.ini</language>
+    </languages>
 	<config>
 		<fields name="params">
 			<fieldset name="basic">
-				<field type="spacer" name="&lt;div style=&quot;background-color: #ddd; padding: 5px; text-align:center; color: red; font-weight:bold;&quot;&gt;Authentication settings (compulsory)&lt;/div&gt;" />
-				<field name="consumer_key" type="text" default="" label="Consumer key" description="Consumer key for your app at https://dev.twitter.com/apps/new" />
-				<field name="consumer_secret" type="text" default="" label="Consumer secret" description="Consumer secret for your app at https://dev.twitter.com/apps/new" />
-				<field name="access_token" type="text" default="" label="Access token" description="Access token for your app at https://dev.twitter.com/apps/new" />
-				<field name="access_secret" type="text" default="" label="Access token secret" description="Access token secret for your app at https://dev.twitter.com/apps/new" />
-				<field type="spacer" name="&lt;div style=&quot;background-color: #ddd; padding: 5px; text-align:center; color: red; font-weight:bold;&quot;&gt;Widget settings&lt;/div&gt;" />
-				<field name="type" type="list" default="1" label="Widget type" description="Choose Timeline to display tweets of a specific user. Choose Search to get results about some query">
+				<field type="spacer" name="&lt;div style=&quot;padding: 5px; border-bottom: 1px solid; text-align:center; color: #FF875B; font-weight:bold;&quot;&gt;Authentication settings (compulsory)&lt;/div&gt;" />
+
+                <field name="consumer_key" type="text" default="" label="LABEL_KEY" description="LABEL_KEY_DES" />
+				<field name="consumer_secret" type="text" default="" label="LABEL_SECRET" description="LABEL_SECRET_DES" />
+				<field name="access_token" type="text" default="" label="LABEL_TOKEN" description="LABEL_TOKEN_DES" />
+				<field name="access_secret" type="text" default="" label="LABEL_TOKEN1" description="LABEL_TOKEN1_DES" />
+
+                <field type="spacer" name="&lt;div style=&quot; border-bottom: 1px solid;  padding: 5px; text-align:center; color: #FF875B; font-weight:bold;&quot;&gt;Widget settings&lt;/div&gt;" />
+				<field name="type" type="list" default="1" label="LABEL_TYPE" description="LABEL_TYPE_DES">
 					<option value="1">Timeline</option>
 					<option value="0">Search</option>
 				</field>
-				<field name="username" type="text" default="twitter" label="Username" description="Twitter username for which you want to display tweets if widget type is set to Timeline" />
-				<field name="query" type="text" default="" label="Search query" description="Query to be searched if widget type is set to Search" />
-				<field name="title" type="text" default="" label="Search title" description="Search title to be displayed in the header" />
-				<field name="link_title" type="list" default="1" label="Link search title" description="When set to yes, title will be link to the search query on Twitte">
+				<field name="username" type="text" default="twitter" label="LABEL_USERNAME" description="LABEL_USERNAME_DES" />
+				<field name="query" type="text" default="" label="LABEL_QUERY" description="LABEL_QUERY_DES" />
+				<field name="title" type="text" default="" label="LABEL_SEARCH" description="LABEL_SEARCH_DES" />
+				<field name="link_title" type="list" default="1" label="LABEL_SEARCH_TITLE" description="LABEL_SEARCH_TITLE_DES">
 					<option value="1">Yes</option>
 					<option value="0">No</option>
 				</field>
-				<field name="count" type="text" default="5" label="Tweet number" description="Number of Tweets to display" />
-				<field type="spacer" name="&lt;div style=&quot;background-color: #666; padding: 5px; text-align:center; color: #fff; font-weight:bold;&quot;&gt;Module appearance &lt;/div&gt;" />
-				<field name="width" type="text" default="" label="Width" description="Module width. Set to empty to use width of the parent container" />
-				<field name="height" type="text" default="" label="Height" description="Module height. If the height is smaller than the space required for tweets to fit, scrollbar will be displayed. Set to empty to never have the scrollbar and use full height" />
-				<field name="header" type="list" default="1" label="Show header" description="Show header on top of tweets. For timeline, this will be name, username and avatar, and for search it will be the search title">
+				<field name="count" type="text" default="5" label="LABEL_TW_NUMBER" description="LABEL_TW_NUMBER_DES" />
+
+            </fieldset>
+            <fieldset name="account">
+                <field type="spacer" name="&lt;div style=&quot; border-bottom: 1px solid; padding: 5px; text-align:center; color: #FF875B; font-weight:bold;&quot;&gt;Module appearance &lt;/div&gt;" />
+				<field name="width" type="text" default="" label="LABEL_WIDTH" description="LABEL_WIDTH_DES" />
+				<field name="height" type="text" default="" label="LABEL_HEIGHT" description="LABEL_HEIGHT_DES" />
+				<field name="header" type="list" default="1" label="LABEL_SHOW_HEADER" description="LABEL_SHOW_HEADER_DES">
 					<option value="1">Yes</option>
 					<option value="0">No</option>
 				</field>
-				<field name="twitter_icon" type="list" default="1" label="Show twitter icon" description="Set to yes to display small twitter icon int the header">
+				<field name="twitter_icon" type="list" default="1" label="LABEL_ICON" description="LABEL_ICON_DES">
 					<option value="1">Yes</option>
 					<option value="0">No</option>
 				</field>
-				<field type="spacer" name="&lt;div style=&quot;background-color: #666; padding: 5px; text-align:center; color: #fff; font-weight:bold;&quot;&gt;Color options &lt;/div&gt;" />
-				<field name="bgd_color" type="color" default="#ffffff" label="Background color" description="Module background color. Default is white" />
-				<field name="link_color" type="color" default="#0084B4" label="Link color" description="Link color. Default is variation of blue" />
-				<field name="border_color" type="color" default="#cccccc" label="Border color" description="Border color, default is light gray" />
-				<field name="text_color" type="color" default="#333333" label="Text color" description="Text color, default is dark gray" />
-				<field name="header_link_color" type="color" default="#333333" label="Header name color" description="Link color for the Twitter name when widget type is set to Timeline" />
-				<field name="header_sub_color" type="color" default="#999999" label="Header username color" description="Link color for the Twitter username when widget type is set to Timeline" />
-				<field name="header_sub_hover_color" type="color" default="#666666" label="Header username on hover color" description="Link color for the Twitter username on mouse hover when widget type is set to Timeline" />
-				<field name="search_title_color" type="color" default="#333333" label="Search title color" description="Link color for the Search title when widget type is set to Search" />
-				<field type="spacer" name="&lt;div style=&quot;background-color: #666; padding: 5px; text-align:center; color: #fff; font-weight:bold;&quot;&gt;Tweet appearance &lt;/div&gt;" />
-				<field name="display_name" type="list" default="1" label="Display username" description="Should the twitter username be displayed?">
+				<field type="spacer" name="&lt;div style=&quot;border-bottom: 1px solid; padding: 5px; text-align:center; color: #FF875B; font-weight:bold;&quot;&gt;Color options &lt;/div&gt;" />
+				<field name="bgd_color" type="color" default="transparent" label="LABEL_BACKGROUND" description="LABEL_BACKGROUND_DES" />
+				<field name="link_color" type="color" default="#0084B4" label="LABEL_LINK_COLOR" description="LABEL_LINK_COLOR_DES" />
+				<field name="border_color" type="color" default="transparent" label="LABEL_BORDER_COLOR" description="LABEL_BORDER_COLOR_DES" />
+				<field name="text_color" type="color" default="#333333" label="LABEL_TEXT_COLOR" description="LABEL_TEXT_COLOR_DES" />
+				<field name="header_link_color" type="color" default="#333333" label="LABEL_HEADER_COLOR" description="LABEL_HEADER_COLOR_DES" />
+				<field name="header_sub_color" type="color" default="#999999" label="LABEL_USER_COLOR" description="LABEL_USER_COLOR_DES" />
+				<field name="header_sub_hover_color" type="color" default="#666666" label="LABEL_USER_HV_COLOR" description="LABEL_USER_HV_COLOR_DES" />
+				<field name="search_title_color" type="color" default="#333333" label="LABEL_SEARCH_TITLE_COLOR" description="LABEL_SEARCH_TITLE_COLOR_DES" />
+				<field type="spacer" name="&lt;div style=&quot;border-bottom: 1px solid; padding: 5px; text-align:center; color: #FF875B; font-weight:bold;&quot;&gt;Tweet appearance &lt;/div&gt;" />
+				<field name="display_name" type="list" default="1" label="LABEL_DISPLAY_USER" description="LABEL_DISPLAY_USER_DES">
 					<option value="1">Yes</option>
 					<option value="0">No</option>
 				</field>
-				<field name="avatars" type="list" default="0" label="Display avatars" description="Should avatars be displayed?">
+				<field name="avatars" type="list" default="0" label="LABEL_AVATAR" description="LABEL_AVATAR_DES">
 					<option value="1">Yes</option>
 					<option value="0">No</option>
 				</field>
-				<field name="timestamps" type="list" default="1" label="Display Timestamps" description="Should timestamps be shown?">
+				<field name="timestamps" type="list" default="1" label="LABEL_TIMESTAMP" description="LABEL_TIMESTAMP_DES">
 					<option value="1">Yes</option>
 					<option value="0">No</option>
 				</field>
-				<field name="reply" type="list" default="1" label="Reply link" description="Should reply link be shown?">
+				<field name="reply" type="list" default="1" label="LABEL_REP_LINK" description="LABEL_REP_LINK_DES">
 					<option value="1">Yes</option>
 					<option value="0">No</option>
 				</field>
-				<field name="retweet" type="list" default="1" label="Retweet link" description="Should retweet link be shown?">
+				<field name="retweet" type="list" default="1" label="LABEL_RETWEET" description="LABEL_RETWEET_DES">
 					<option value="1">Yes</option>
 					<option value="0">No</option>
 				</field>
-				<field name="favorite" type="list" default="1" label="Favorite link" description="Should favorite link be shown?">
+				<field name="favorite" type="list" default="1" label="LABEL_FAVORITE"  description="LABEL_FAVORITE_DES">
 					<option value="1">Yes</option>
 					<option value="0">No</option>
 				</field>
-				<field name="show_link" type="list" default="1" label="&lt;span style=&quot;font-size: 9px; text-decoration: underline;&quot;&gt;Donate a link to us?&lt;/span&gt;" description="This is a small link at the bottom of this app, it links to our main website and helps us grow our business. Please consider leaving it active as a small donation for our free plugin. However, you can get rid of the link by not checking this box. Hope this is possible.">
+				<field name="follow_us" type="list" default="1" label="LABEL_FOLLOW"  description="LABEL_FOLLOW_DES">
 					<option value="1">Yes</option>
 					<option value="0">No</option>
 				</field>
+
 			</fieldset>
+            <fieldset name="parallax">
+                <field name="parallax_background" type="media" label="LABEL_PARALLAX_BACKGROUND" description="LABEL_PARALLAX_BACKGROUND_DESC"/>
+                <field name="parallax_padding" type="text" label="LABEL_PARALLAX_PADDING" default="60px 0" description="LABEL_PARALLAX_PADDING_DESC"/>
+                <field name="parallax_overlay" type="color" label="LABEL_PARALLAX_OVERLAY" default="#000000" description="LABEL_PARALLAX_OVERLAY_DESC"/>
+                <field name="parallax_opacity" type="text" label="LABEL_PARALLAX_OPACITY" default="0.5" description="LABEL_PARALLAX_OPACITY_DESC"/>
+            </fieldset>
 			<fieldset
 				name="advanced">
 				<field

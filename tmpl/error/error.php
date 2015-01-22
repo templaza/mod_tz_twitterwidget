@@ -20,7 +20,7 @@
 	defined('_JEXEC') or die;
 ?>
 
-<div id="wds">
+<div id="tztwd">
 <?php if(isset($curlDisabled)): ?>
 Your PHP doesn't have cURL extension enabled. Please contact your host and ask them to enable it.
 <?php else: ?>
